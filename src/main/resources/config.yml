@@ -1,0 +1,30 @@
+#################
+# +-----------+ #
+# | LifeSteal | #
+# +-----------+ #
+#################
+
+# Only affects administrator commands
+console only: false
+
+gui:
+  force: false
+  force admin: false
+
+hearts:
+  max: 20
+  loss per death: 1
+  show hearts: false
+  
+revive:
+  consume: true
+  craftable: true
+  hearts per consume: 10
+  give revive: true
+  free:
+    active: true
+    time: '14D'
+    consume: false
+    hearts per consume: 5
+    give revive: false
+    use first: true
