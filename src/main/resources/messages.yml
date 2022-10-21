@@ -1,0 +1,104 @@
+messages:
+  no permission: '&7You do not have permission to perform this action.'
+  prefix: '&c&lLifeSteal'
+  chat prefix: '&c&lLifeSteal &8&l>> '
+  
+  basic:
+    lives:
+      message: '&7You currently possess &b%revives% &7amount of revives of a max of &b%max_lives%'
+      show location: CHAT
+    lives other:
+      message: '&7Player &b%player% &7currently has &b%revives% &7revives left.'
+      shoe location: CHAT
+    consume:
+      message: '&7You have consumed revives. &b%hearts% &7have been gained, &b%revives% &7revives left.'
+      show location: CHAT
+    give:
+      message: '&7You gave &b%revives% &7revives to &b%player%'
+      show location: CHAT
+    receive:
+      message: '&7You received &b%revives% &7revives from &b%player%'
+      show location: CHAT
+    craft:
+      message: '&You have crafted &b%revives% &7revives.'
+      show location: CHAT
+    revive:
+      message: '&7You have revived &b%player%'
+      show location: CHAT
+    
+  
+  
+  life:
+    stolen:
+      message: '&7You have lost a life to &b%player%&7.'
+      show location: CHAT
+    lost:
+      message: '&7You died... and &clost &7a life.'
+      show location: CHAT
+    gain:
+      message:  '&7You have &agained&7 a life!'
+      show location: CHAT
+  revive:
+    amount:
+      message: '&7You have &b%amount%&7 of self-revives left.'
+      show location: CHAT
+    lost:
+      message: '&7You have &clost &7a self-revive. Revives left: &b%amount%'
+      show location: CHAT
+    gain:
+      message: '&7You have &agained &7a self-revive. Revives left: &b%amount%'
+      show location: CHAT
+    give:
+      message: '&7You gifted &b%player% &7a revive. Revives left: &b%amount%'
+      show location: CHAT
+      
+  admin:
+    reset:
+      message: '&7Player &b%player% &7has been reset.'
+      show location: CHAT
+    reset all:
+      message: '&7All Players have been reset.'
+      show location: CHAT
+    reload:
+      message: '&aPlugin Reload Complete'
+      show location: CHAT
+  
+    revives:
+      set:
+        message: '&7Player &b%player% &7has revives set to &b%revives%'
+        show location: CHAT
+      set all:
+        message: '&7All Players revives set to &b%revives%'
+        show location: CHAT
+      give:
+        message: '&7Player &b%player% &7has been given &b%revives% &7revives.'
+        show location: CHAT
+      give all:
+        message: '&7All Players have been given &b%revives% &7revives.'
+        show location: CHAT
+      take:
+        message: '&7Removed &b%revives% &7revives from &b%player%'
+        show location: CHAT
+      take all:
+        message: '&7Removed &b%revives% &7revives from all players.'
+        show location: CHAT
+    hearts:
+      set:
+        message: '&7Player &b%player% &7has hearts set to &b%%hearts%'
+        show location: CHAT
+      set all:
+        message: '&7All Players hearts have been set to &b%hearts%'
+        show location: CHAT
+      give:
+        message: '&7Gave &b%hearts% &7to player &b%player%'
+        show location: CHAT
+      give all:
+        message: '&7Gave &b%hearts% &7to all players.'
+        show location: CHAT
+      take:
+        message: '&7Took &b%hearts% &7heartsfrom &b%player%&7.'
+        show location: CHAT
+      take all:
+        message: '&7Took &b%hearts% &7hearts from all players.'
+        show location: CHAT
+    
