@@ -1,0 +1,13 @@
+name: LifeSteal
+version: 1.0
+main: fredrix.LifeSteal
+author: FredrixMC
+authors: [Sommod]
+depend: [AACore]
+api-version: 1.19.2
+description: Steal hearts from other players from killing them.
+
+commands:
+  lifesteal:
+    usage: /LifeSteal help for list of commands
+    aliases: [ls, lifes, steal]
