@@ -2,9 +2,12 @@ name: ''
 
 lives:
   crafted: 0
-  timed: 1
+  free: 1
   allowed crafted: 1
-  allowed timed: 1
+  allowed free: 1
   time: -1
+  alive: true
 
-hearts: 10
+hearts:
+  max: 20
+  current: 10
