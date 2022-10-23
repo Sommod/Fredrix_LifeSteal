@@ -1,5 +1,6 @@
 package fredrixmc.player;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 public class PlayerData {
@@ -12,11 +13,11 @@ public class PlayerData {
 	private float maxRevives;
 	private float maxCraftedRevives;
 	private float maxTimedRevives;
-	private int maxHearts;
-	private int currentHearts;
+	private float maxHearts;
+	private float currentHearts;
 	
 	public PlayerData(UUID id) {
-		
+		this(id, 0, 1, getNextMonthTime(), false, 1, 1, 1, 20, 10);
 	}
 	
 	public PlayerData(UUID id, float craftedRevives, float timedRevives, long nextTimedRevive, boolean isDead, int maxRevives, int maxCraftedRevives, int maxTimedRevives, int maxHearts, int currentHearts) {
@@ -32,6 +33,12 @@ public class PlayerData {
 		this.currentHearts = currentHearts;
 	}
 	
+	private static long getNextMonthTime() {
+		Calendar result = Calendar.getInstance();
+		result.add(Calendar.MONTH, 1);
+		return result.getTimeInMillis();
+	}
+	
 	public UUID getID() { return id; }
 	public boolean isID(UUID id) { return id.equals(this.id); }
 	public float getCraftedRevives() { return craftedRevives; }
@@ -41,19 +48,19 @@ public class PlayerData {
 	public float getMaxRevives() { return maxRevives; }
 	public float getMaxCraftedRevives() { return maxCraftedRevives; }
 	public float getMaxFreeRevives() { return maxTimedRevives; }
-	public int getMaxHearts() { return maxHearts; }
-	public int getCurrentHearts() { return currentHearts; }
+	public float getMaxHearts() { return maxHearts; }
+	public float getCurrentHearts() { return currentHearts; }
 	
 	public void setIsDead(boolean value) {
 		isDead = value;
 	}
 	
 	public void setCraftedRevives(int value) {
-		craftedRevives = value;
+		craftedRevives = positive(ensureValue(value));
 	}
 	
 	public void setFreeRevives(int value) {
-		timedRevives = value;
+		timedRevives = positive(ensureValue(value));
 	}
 	
 	public void addCraftedRevives(int value) {
@@ -118,7 +125,26 @@ public class PlayerData {
 	}
 	
 	public void substractMaxRevives(float value) {
-		maxRevives = alterValue(maxRevives, value);
+		maxRevives = alterValue(maxRevives, -value);
 	}
-
+	
+	public void substractMaxCraftedRevives(float value) {
+		maxCraftedRevives = alterValue(maxCraftedRevives, -value);
+	}
+	
+	public void substractMaxFreeRevives(float value) {
+		maxTimedRevives = alterValue(maxTimedRevives, -value);
+	}
+	
+	public void setMaxHearts(float value) {
+		maxHearts = positive(ensureValue(value));
+	}
+	
+	public void setCurrentHearts(float value) {
+		currentHearts = positive(ensureValue(value));
+	}
+	
+	private float positive(float value) {
+		return value > 0 ? value : -value;
+	}
 }
