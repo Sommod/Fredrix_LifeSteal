@@ -1,11 +1,16 @@
 package fredrixmc.player;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 public class PlayerData {
 	
 	private UUID id;
+	private String name;
 	private float craftedRevives;
 	private float timedRevives;
 	private long nextRevive;
@@ -17,10 +22,10 @@ public class PlayerData {
 	private float currentHearts;
 	
 	public PlayerData(UUID id) {
-		this(id, 0, 1, getNextMonthTime(), false, 1, 1, 1, 20, 10);
+		this(id, Bukkit.getServer().getOfflinePlayer(id).getName(), 0, 1, getNextMonthTime(), false, 1, 1, 1, 20, 10);
 	}
 	
-	public PlayerData(UUID id, float craftedRevives, float timedRevives, long nextTimedRevive, boolean isDead, int maxRevives, int maxCraftedRevives, int maxTimedRevives, int maxHearts, int currentHearts) {
+	public PlayerData(UUID id, String name, float craftedRevives, float timedRevives, long nextTimedRevive, boolean isDead, int maxRevives, int maxCraftedRevives, int maxTimedRevives, int maxHearts, int currentHearts) {
 		this.id = id;
 		this.craftedRevives = craftedRevives;
 		this.timedRevives = timedRevives;
@@ -33,6 +38,22 @@ public class PlayerData {
 		this.currentHearts = currentHearts;
 	}
 	
+	public PlayerData(File dataFile) {
+		YamlConfiguration loader = YamlConfiguration.loadConfiguration(dataFile);
+		
+		id = UUID.fromString(dataFile.getName());
+		name = loader.getString("name");
+		craftedRevives = (float) loader.getDouble("lives.crafted");
+		timedRevives = (float) loader.getDouble("lives.free");
+		nextRevive = loader.getLong("lives.time");
+		isDead = loader.getBoolean("lives.alive");
+		maxCraftedRevives = (float) loader.getDouble("lives.allowed crafted");
+		maxTimedRevives = (float) loader.getDouble("lives.allowed free");
+		maxRevives = maxCraftedRevives + maxTimedRevives;
+		maxHearts = (float) loader.getDouble("hearts.max");
+		currentHearts = (float) loader.getDouble("hearts.current");
+	}
+	
 	private static long getNextMonthTime() {
 		Calendar result = Calendar.getInstance();
 		result.add(Calendar.MONTH, 1);
@@ -40,6 +61,7 @@ public class PlayerData {
 	}
 	
 	public UUID getID() { return id; }
+	public String getName() { return name; }
 	public boolean isID(UUID id) { return id.equals(this.id); }
 	public float getCraftedRevives() { return craftedRevives; }
 	public float getFreeRevives() { return timedRevives; }
