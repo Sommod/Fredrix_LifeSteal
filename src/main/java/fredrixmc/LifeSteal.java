@@ -3,15 +3,13 @@ package fredrixmc;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import coldfyre.aacore.api.manager.FilesManager;
-import coldfyre.aacore.api.manager.PluginManager;
+import fredrixmc.manager.Manager;
 
 public class LifeSteal extends JavaPlugin {
 	
-	private PluginManager<LifeSteal> manager;
-	
 	@Override
 	public void onEnable() {
-		manager = new PluginManager<LifeSteal>(this, new FilesManager(getDataFolder()));
+		new Manager(this, new FilesManager(getDataFolder()));
 	}
 
 }
