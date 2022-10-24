@@ -10,15 +10,14 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import coldfyre.aacore.api.manager.FilesManager;
-import coldfyre.aacore.api.manager.PluginManager;
-import fredrixmc.LifeSteal;
+import fredrixmc.manager.Manager;
 
 public class PlayerManager {
 	
 	private Map<UUID, PlayerData> data;
-	private PluginManager<LifeSteal> manager;
+	private Manager manager;
 	
-	public PlayerManager(PluginManager<LifeSteal> manager) {
+	public PlayerManager(Manager manager) {
 		this.manager = manager;
 		
 		fillData();
