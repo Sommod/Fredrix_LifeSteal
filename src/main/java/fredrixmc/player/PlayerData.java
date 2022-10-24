@@ -166,6 +166,14 @@ public class PlayerData {
 		currentHearts = positive(ensureValue(value));
 	}
 	
+	public void substractCurrentHearts(float value) {
+		currentHearts -= positive(ensureValue(value));
+	}
+	
+	public void substractMaxHearts(float value) {
+		maxHearts -= positive(ensureValue(value));
+	}
+	
 	private float positive(float value) {
 		return value > 0 ? value : -value;
 	}
