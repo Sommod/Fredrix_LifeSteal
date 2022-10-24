@@ -20,12 +20,16 @@ public class PlayerManager {
 	
 	public PlayerManager(PluginManager<LifeSteal> manager) {
 		this.manager = manager;
-		data = new HashMap<UUID, PlayerData>();
 		
 		fillData();
 	}
 	
 	private void fillData() {
+		if(data != null)
+			data.clear();
+		
+		data = new HashMap<UUID, PlayerData>();
+		
 		for(File f : manager.getFilesManager().getDirectory("Player Data").listFiles()) {
 			PlayerData load = new PlayerData(f);
 			
@@ -56,6 +60,22 @@ public class PlayerManager {
 	public void createNewPlayerData(PlayerData playerData, boolean forceOverride) {
 		if((exists(playerData.getID()) && forceOverride) || !exists(playerData.getID()))
 			data.put(playerData.getID(), playerData);
+	}
+	
+	public boolean deletePlayerData(OfflinePlayer player) {
+		return deletePlayerData(data.get(player.getUniqueId()));
+	}
+	
+	public boolean deletePlayerData(UUID id) {
+		return deletePlayerData(data.get(id));
+	}
+	
+	public boolean deletePlayerData(PlayerData pData) {
+		if(pData == null)
+			return false;
+		
+		manager.getFilesManager().deleteFile(pData.getID().toString());
+		return true;	
 	}
 	
 	public void savePlayerData(PlayerData data) {
@@ -90,16 +110,22 @@ public class PlayerManager {
 			savePlayerData(pData);
 	}
 	
-	public void reload() {
+	public void reload(boolean saveFirst) {
+		if(saveFirst)
+			saveAll();
 		
+		fillData();
 	}
 	
-	public void reloadPlayer(UUID id) {
+	public void reloadPlayer(UUID id, boolean saveFirst) {
+		if(saveFirst)
+			savePlayerData(data.get(id));
 		
+		data.put(id, new PlayerData(manager.getFilesManager().getFile(id.toString() + ".yml")));
 	}
 	
-	public void reloadPlayer(OfflinePlayer player) {
-		
+	public void reloadPlayer(OfflinePlayer player, boolean saveFirst) {
+		reloadPlayer(player.getUniqueId(), saveFirst);
 	}
 	
 	private boolean save(YamlConfiguration conf, File file) {
