@@ -9,5 +9,5 @@ lives:
   alive: true
 
 hearts:
-  max: 20
-  current: 10
+  max: 40
+  current: 20
