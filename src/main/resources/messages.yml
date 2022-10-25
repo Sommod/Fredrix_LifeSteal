@@ -1,6 +1,6 @@
 messages:
   no permission: '&7You do not have permission to perform this action.'
-  prefix: '&c&lLifeSteal'
+  title prefix: '&c&lLifeSteal'
   chat prefix: '&c&lLifeSteal &8&l>> '
   
   basic:
@@ -41,6 +41,9 @@ messages:
       message:  '&7You have &agained&7 a life!'
       show location: CHAT
   revive:
+    rest:
+      message: '&7Your lives have been reset. Revives left: &b%amount%'
+      show location: CHAT
     amount:
       message: '&7You have &b%amount%&7 of self-revives left.'
       show location: CHAT
