@@ -77,27 +77,27 @@ public class PlayerData {
 		isDead = value;
 	}
 	
-	public void setCraftedRevives(int value) {
+	public void setCraftedRevives(float value) {
 		craftedRevives = positive(ensureValue(value));
 	}
 	
-	public void setFreeRevives(int value) {
+	public void setFreeRevives(float value) {
 		timedRevives = positive(ensureValue(value));
 	}
 	
-	public void addCraftedRevives(int value) {
+	public void addCraftedRevives(float value) {
 		craftedRevives = alterValue(craftedRevives, value);
 	}
 	
-	public void addFreeRevives(int value) {
+	public void addFreeRevives(float value) {
 		timedRevives = alterValue(timedRevives, value);
 	}
 	
-	public void substracCraftedRevives(int value) {
+	public void subtractCraftedRevives(float value) {
 		craftedRevives = alterValue(craftedRevives, -(value));
 	}
 	
-	public void substracFreeRevives(int value) {
+	public void subtractFreeRevives(float value) {
 		timedRevives = alterValue(timedRevives, -(value));
 	}
 	
@@ -120,6 +120,14 @@ public class PlayerData {
 		else
 			return Math.round(value) + .5F;
 		
+	}
+	
+	public boolean hasAnyRevives() {
+		return craftedRevives + timedRevives > 0;
+	}
+	
+	public float getTotalRevives() {
+		return craftedRevives + timedRevives;
 	}
 	
 	public void setMaxRevives(float value) {
@@ -146,15 +154,15 @@ public class PlayerData {
 		maxTimedRevives = alterValue(maxTimedRevives, value);
 	}
 	
-	public void substractMaxRevives(float value) {
+	public void subtractMaxRevives(float value) {
 		maxRevives = alterValue(maxRevives, -value);
 	}
 	
-	public void substractMaxCraftedRevives(float value) {
+	public void subtractMaxCraftedRevives(float value) {
 		maxCraftedRevives = alterValue(maxCraftedRevives, -value);
 	}
 	
-	public void substractMaxFreeRevives(float value) {
+	public void subtractMaxFreeRevives(float value) {
 		maxTimedRevives = alterValue(maxTimedRevives, -value);
 	}
 	
@@ -166,11 +174,11 @@ public class PlayerData {
 		currentHearts = positive(ensureValue(value));
 	}
 	
-	public void substractCurrentHearts(float value) {
+	public void subtractCurrentHearts(float value) {
 		currentHearts -= positive(ensureValue(value));
 	}
 	
-	public void substractMaxHearts(float value) {
+	public void subtractMaxHearts(float value) {
 		maxHearts -= positive(ensureValue(value));
 	}
 	
