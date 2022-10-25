@@ -21,6 +21,30 @@ public class DeathHandler implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		PlayerData data = manager.getPlayerManager().getPlayerData(event.getEntity());
+		
+		if(data.getCurrentHearts() <= 2) {
+			if(data.hasAnyRevives() && data.getTotalRevives() >= 1F) {
+				float tmp = 1F;
+				
+				if(data.getFreeRevives() > 0 && tmp <= data.getFreeRevives()) {
+					tmp -= data.getFreeRevives();
+					data.setFreeRevives(0F);
+				}
+				
+				if(tmp != 0F) {
+					data.subtractCraftedRevives(tmp);
+					tmp = 0;
+				}
+				
+				data.setCurrentHearts(20F);
+				data.setIsDead(false);
+			} else {
+				data.setIsDead(true);
+				event.getEntity().kick(manager.getMessagesManager().getMessage("messages.basic.kick.message").replace('&', '§'));
+			}
+		}
+		
+		
 		//TODO: Check health to see if value is 1 heart (2 value).
 		//TODO: If true, then set isDead to TRUE.
 		//TODO: Kick/Ban player from server.
