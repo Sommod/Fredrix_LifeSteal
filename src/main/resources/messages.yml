@@ -25,6 +25,8 @@ messages:
     revive:
       message: '&7You have revived &b%player%'
       show location: CHAT
+    kick:
+      message: '&7You have lost all your revives. You are unable to join back until you are revived or receive a revive.'
     
   
   
