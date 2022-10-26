@@ -32,10 +32,10 @@ public class MessageObject implements MessageInstance {
 	}
 	
 	private String alter(String... value) {
-		String result = new String(message);
+		if(value.length == 0 || value.length % 2 != 0)
+			return new String(message);
 		
-		if(value.length % 2 != 0)
-			return result;
+		String result = new String(message);
 		
 		for(int i = 0, j = 1; i < value.length; i += 2, j += 2)
 			result = result.replaceAll(value[i], value[j]);
