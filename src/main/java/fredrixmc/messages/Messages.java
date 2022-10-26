@@ -1,9 +1,11 @@
-package fredrixmc.manager;
+package fredrixmc.messages;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import fredrixmc.manager.Manager;
 
 public class Messages {
 	
