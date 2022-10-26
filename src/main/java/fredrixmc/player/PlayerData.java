@@ -166,6 +166,31 @@ public class PlayerData {
 		maxTimedRevives = alterValue(maxTimedRevives, -value);
 	}
 	
+	public void subtractRevives(float value, boolean freeFirst) {
+		if(value >= getTotalRevives()) {
+			setCraftedRevives(0);
+			setFreeRevives(0);
+			
+		} else if(freeFirst) {
+			if(timedRevives >= value)
+				timedRevives -= value;
+			else {
+				value -= timedRevives;
+				timedRevives = 0F;
+				craftedRevives -= value;
+			}
+			
+		} else {
+			if(craftedRevives >= value)
+				craftedRevives -= value;
+			else {
+				value -= craftedRevives;
+				craftedRevives = 0F;
+				timedRevives -= value;
+			}
+		}
+	}
+	
 	public void setMaxHearts(float value) {
 		maxHearts = positive(ensureValue(value));
 	}
