@@ -41,7 +41,7 @@ messages:
       message:  '&7You have &agained&7 a life!'
       show location: CHAT
   revive:
-    rest:
+    reset:
       message: '&7Your lives have been reset. Revives left: &b%amount%'
       show location: CHAT
     amount:
