@@ -21,6 +21,7 @@ revive:
   craftable: true
   hearts per consume: 10
   give revive: true
+  remove all on kick: true
   free:
     active: true
     time: '14D'
