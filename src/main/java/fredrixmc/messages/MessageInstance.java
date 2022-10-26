@@ -1,6 +1,6 @@
 package fredrixmc.messages;
 
-import fredrixmc.messages.Messages.Location;
+import fredrixmc.manager.Messages.Location;
 
 public interface MessageInstance {
 	

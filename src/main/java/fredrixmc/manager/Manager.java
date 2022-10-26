@@ -3,7 +3,6 @@ package fredrixmc.manager;
 import coldfyre.aacore.api.manager.FilesManager;
 import coldfyre.aacore.api.manager.PluginManager;
 import fredrixmc.LifeSteal;
-import fredrixmc.messages.Messages;
 import fredrixmc.player.PlayerManager;
 
 public class Manager extends PluginManager<LifeSteal> {

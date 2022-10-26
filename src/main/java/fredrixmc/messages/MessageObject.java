@@ -2,7 +2,7 @@ package fredrixmc.messages;
 
 import javax.annotation.Nullable;
 
-import fredrixmc.messages.Messages.Location;
+import fredrixmc.manager.Messages.Location;
 
 public class MessageObject implements MessageInstance {
 	
