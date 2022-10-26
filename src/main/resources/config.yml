@@ -7,6 +7,12 @@
 # Only affects administrator commands
 console only: false
 
+default:
+  hearts: 10
+  revive:
+    free: 1
+    crafted: 0
+    
 gui:
   force: false
   force admin: false
