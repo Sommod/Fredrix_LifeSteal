@@ -22,25 +22,21 @@ public class Messages {
 		}
 	}
 	
-	private Map<String, String> message;
-	private Map<String, Location> location;
-	
+	private Map<String, MessageInstance> messages;
 	private Manager manager;
 	
 	public Messages(Manager manager) {
-		message = new HashMap<String, String>();
-		location = new HashMap<String, Location>();
+		messages = new HashMap<String, MessageInstance>();
 		this.manager = manager;
 		
 		initMessages();
 	}
 	
 	private void initMessages() {
-		message.clear();
-		location.clear();
+		messages.clear();
 		String[] path = new String[] {"messages.basic", "messages.life", "messages.revive", "messages.admin"};
 		
-		YamlConfiguration messageConf = YamlConfiguration.loadConfiguration(manager.getFilesManager().getFile("config"));
+		YamlConfiguration messageConf = YamlConfiguration.loadConfiguration(manager.getFilesManager().getFile("messages"));
 		
 		for(String s : path) {
 			if(s.equals("messages.admin")) {
@@ -51,15 +47,13 @@ public class Messages {
 						for(String subSection : messageConf.getConfigurationSection(s + "." + section).getValues(false).keySet()) {
 							String superPath = fullPath + "." + section + "." + subSection;
 							
-							message.put(superPath + ".message",messageConf.getString(superPath + ".message"));
-							location.put(superPath + ".show location", Location.getLocation(messageConf.getString(superPath + ".show location")));
+							messages.put(superPath.substring(superPath.indexOf(".") + 1), createInstance(messageConf, superPath));
 						}
 						
 						continue;
 					}
 					
-					message.put(fullPath + ".message", messageConf.getString(fullPath + ".message"));
-					location.put(fullPath + ".show location", Location.getLocation(messageConf.getString(fullPath + ".show location")));
+					messages.put(fullPath.substring(fullPath.indexOf(".") + 1), createInstance(messageConf, fullPath));
 				}
 				
 				continue;
@@ -69,24 +63,36 @@ public class Messages {
 				String fullPath = s + "." + section;
 				
 				if(fullPath.equals("messages.basic.kick")) {
-					message.put(fullPath + ".message", messageConf.getString(fullPath + ".message"));
-					location.put(fullPath + ".show location", Location.KICK);
+					messages.put(fullPath.substring(fullPath.indexOf(".") + 1), new MessageObject(messageConf.getString(fullPath + ".message"), null));
 					continue;
 				}
 				
-				message.put(fullPath + ".message", messageConf.getString(fullPath + ".message"));
-				location.put(fullPath + ".show location", Location.getLocation(messageConf.getString(fullPath + ".show location")));
+				messages.put(fullPath.substring(fullPath.indexOf(".") + 1), createInstance(messageConf, fullPath));
 			}
 		}
 		
 	}
 	
-	public String getMessage(String path) {
-		return message.get(path);
+	private MessageInstance createInstance(YamlConfiguration conf, String path) {
+		return new MessageObject(conf.getString(path + ".message"), Location.getLocation(conf.getString(path + ".show location")));
 	}
 	
-	public Location getLocation(String path) {
-		return location.get(path);
+	public MessageInstance getMessage(String path) {
+		return messages.get(path);
+	}
+	
+	public boolean exists(String path) {
+		return messages.containsKey(path);
+	}
+	
+	public void reloadMessage(String path) {
+		YamlConfiguration conf = YamlConfiguration.loadConfiguration(manager.getFilesManager().getFile("messages"));
+		
+		messages.put(path.substring(path.indexOf(".") + 1), createInstance(conf, path));
+	}
+	
+	public void reload() {
+		initMessages();
 	}
 
 }
