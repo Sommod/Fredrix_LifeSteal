@@ -31,7 +31,8 @@ public class DeathHandler implements Listener {
 		
 		} else {
 			if(data.getTotalRevives() < 1) {
-				
+				data.setIsDead(true);
+				//TODO: Kick player with kick message
 			}
 		}
 		
