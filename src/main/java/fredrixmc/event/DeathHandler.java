@@ -4,7 +4,6 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
@@ -13,15 +12,9 @@ import fredrixmc.player.PlayerData;
 
 public class DeathHandler implements Listener {
 	
-	private Manager manager;
+	protected DeathHandler() { }
 	
-	public DeathHandler(Manager manager) {
-		this.manager = manager;
-		manager.getPlugin().getServer().getPluginManager().registerEvents(this, manager.getPlugin());
-	}
-	
-	@EventHandler
-	public void onDeath(PlayerDeathEvent event) {
+	protected void onDeath(Manager manager, PlayerDeathEvent event) {
 		PlayerData data = manager.getPlayerManager().getPlayerData(event.getEntity());
 		AttributeInstance instance;
 		
@@ -31,19 +24,18 @@ public class DeathHandler implements Listener {
 			instance.setBaseValue(data.getCurrentHearts());
 		
 		} else {
+			YamlConfiguration tmp = YamlConfiguration.loadConfiguration(manager.getFilesManager().getFile("config"));
+			
 			if(data.getTotalRevives() < 1) {
 				data.setIsDead(true);
 				event.getEntity().kickPlayer(manager.getMessagesManager().getMessage("basic.kick").getMessage());
 				
-				YamlConfiguration tmp = YamlConfiguration.loadConfiguration(manager.getFilesManager().getFile("config"));
 				if(tmp.getBoolean("revive.remove all on kick")) {
 					data.setCraftedRevives(0);
 					data.setFreeRevives(0);
 				}
 				
-			} else {
-				YamlConfiguration tmp = YamlConfiguration.loadConfiguration(manager.getFilesManager().getFile("config"));
-								
+			} else {			
 				data.subtractRevives(1, tmp.getBoolean("revive.free.use first"));
 				data.setCurrentHearts((float) tmp.getDouble("default.hearts"));
 			}
