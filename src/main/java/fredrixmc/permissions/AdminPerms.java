@@ -2,9 +2,9 @@ package fredrixmc.permissions;
 
 public enum AdminPerms {
 	
-	SUPER_OP("*"), OP("*"), RELOAD("reload"), RESET("reset"), RESET_OTHER("reset.other"), RESET_ALL("reset.all"), GIVE("give"), GIVE_ALL("giveall"), SET("set"), SET_ALL("setall"), TAKE("take"), TAKE_ALL("takeall"), TAKE_ALL_OTHER("takeall.other"),
-	HEARTS_GIVE("hearts.give"), HEARTS_GIVE_ALL("hearts.giveall"), HEARTS_SET("hearts.set"), HEARTS_SET_ALL("hearts.setall"), HEARTS_TAKE("hearts.take"), HEARTS_TAKE_ALL("hearts.takeall"), HEARTS_OP("hearts.*");
-	
+	OP("*"), ADMIN_OP("*"), RELOAD("reload"), RESET("reset"), RESET_ALL("reset.all"), GIVE("give"), ALL_GIVE("all.give"), ALL_SET("all.set"), ALL_TAKE("all.take"),
+	SET("set"), TAKE("take"), HEARTS_OP("*"), HEARTS_GIVE("hearts.give"), HEARTS_SET("hearts.set"), HEARTS_TAKE("hearts.take"), HEARTS_ALLSET("hearts.all.set"),
+	HEARTS_ALL_TAKE("hearts.all.take"), HEARTS_ALL_GIVE("hearts.all.give");
 	private String name;
 	
 	private AdminPerms(String name) {
@@ -13,7 +13,7 @@ public enum AdminPerms {
 	
 	@Override
 	public String toString() {
-		if(this == SUPER_OP)
+		if(this == OP)
 			return "lifesteal.".concat(name);
 		
 		return "lifesteal.admin.".concat(name);

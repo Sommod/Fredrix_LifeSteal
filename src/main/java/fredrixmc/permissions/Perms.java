@@ -2,7 +2,7 @@ package fredrixmc.permissions;
 
 public enum Perms {
 	
-	SUPER_OP("*"), LIVES("lives"), LIVES_OTHER("lives.other"), REVIVE("revive"), GIVEREVIVE("giverevive"), GIVEREVIVE_FREE("giverevive.free"), CRAFT("craft"), CONSUME("consume");
+	OP("*"), LIVES("lives"), LIVES_OTHER("lives.other"), REVIVE("revive"), GIVE("give"), CRAFT("craft"), CONSUME("consume");
 	
 
 	private String name;
