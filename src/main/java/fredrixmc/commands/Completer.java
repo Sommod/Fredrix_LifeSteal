@@ -17,6 +17,17 @@ public class Completer implements TabCompleter {
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+		if(command.getName().equalsIgnoreCase("lifesteal")) {
+			switch (args.length) {
+			case 0:
+				
+				break;
+
+			default:
+				break;
+			}
+		}
+		
 		return null;
 	}
 
