@@ -12,7 +12,9 @@ public enum HelpInfo {
 	
 	// Admin Commands
 	ADMIN("Admin", "/LifeSteal Admin", "§6/LifeSteal §b§nAdmin", "§c§lAdmin §7[§ca§7]§f:", "§fBase command for all Administrator commands. These range from altering plugin data to player data."),
-	ADMIN_HELP("Admin Help", "/LifeSteal Admin Help [Command]", "§6/LifeSteal Admin §b§nHelp §r§6[Command]", "§c§lHelp §7[§ch§7]§f:", "§fDisplays a list of all Administrator commands; Optionally, can display shortcuts and command description.");
+	ADMIN_HELP("Admin Help", "/LifeSteal Admin Help [Command]", "§6/LifeSteal Admin §b§nHelp §r§6[Command]", "§c§lHelp §7[§ch§7]§f:", "§fDisplays a list of all Administrator commands; Optionally, can display shortcuts and command description."),
+	ADMIN_SET("Admin Set", "/LifeSteal Admin Set <Player> <amount>", "§6/LifeSteal Admin §b§nSet§r §6<Player> <Amount>", "§c§lSet §7[§cs§7]§f:", "§fForce sets the players self-revives. This ignores the configuration setting of the amount of lives a person can have."),
+	ADMIN_GIVEALL("Admin Giveall", "/LifeSteal Admin Giveall <Amount>", "§6LifeSteal Admin §b§nGiveall§r §6<Amount>", "§c§lGiveall §7[§cga§7]§f:", "§fGives all the players (Online and Offline) the specified amount of self-revives. Should the amount surpass the Config Setting in Console, then the amount will be set to the maximum limit.");
 	//TODO: Create help messages for all Admin Commands
 	
 	private String top, command, formattedCommand, message, shortcuts;
